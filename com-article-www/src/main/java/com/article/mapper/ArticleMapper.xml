@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.article.mapper.ArticleMapper" >
+		
+		<!-- 查新字段 -->
+		<sql id="selectFields">
+    		id , portal , title , editor , create_date , url coverUrl , context
+		</sql>
+		
+		<!-- 保存字段 -->
+		<sql id="saveFields">
+    		portal , title , editor , create_date , url , context
+		</sql>
+		
+		<!-- 查询语句 -->
+		<select id="articles" resultType="com.article.domain.Article">
+			SELECT 
+			<include refid="selectFields"/>
+			FROM t_article;
+		</select>
+		
+		<!-- 根据编号查询 -->
+		<select id="find" resultType="com.article.domain.Article">
+			SELECT
+			<include refid="selectFields"/> 
+			FROM t_article
+			<where>
+				<if test="id != null">
+					id = #{id}
+				</if>
+			</where>
+		</select>
+		
+		<!-- 保存语句 -->
+		<insert id="save" parameterType="com.article.domain.Article">
+			INSERT INTO t_article
+			(<include refid="saveFields"/>)
+			VALUES
+			(
+				#{portal},
+				#{title},
+				#{editor},
+				#{create_date},
+				#{coverUrl},
+				#{context}
+			);
+		</insert>
+		
+		<!-- 更新语句 -->
+		<update id="update" parameterType="com.article.domain.Article">
+			UPDATE t_article
+			SET
+			portal=#{portal},
+			title=#{title},
+			editor=#{editor},
+			create_date=#{create_date},
+			url=#{coverUrl},
+			context=#{context}
+			WHERE
+			id=#{id}
+		</update>
+		
+</mapper>
