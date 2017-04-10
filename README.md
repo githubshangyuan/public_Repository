@@ -1,6 +1,0 @@
-＃public_Repository
-这是一个maven工程
-将文件以zip格式下载到本地，解压缩，复制解压路径
-在eclipse中以已存在的maven工程导入
-在工程内部有个sql文件，在mysql中执行，生成数据
-在eclipse中用jetty:run 命令运行项目，浏览器访问localhost即可
